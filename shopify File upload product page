@@ -1,0 +1,20 @@
+<style>
+.line-item-property__field label {
+    background: #000;
+    padding: 10px 100px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    cursor: pointer;
+}
+input[type="file"]{
+  display:none;
+}
+                    
+  </style>
+<div class="line-item-property__field">
+  <input required class="required" id="your-name" type="file" name="properties[Your name]" width="100%">
+     <label for="your-name">Choose a Photo</label>
+</div>
