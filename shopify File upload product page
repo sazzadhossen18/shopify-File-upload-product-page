@@ -18,3 +18,127 @@ input[type="file"]{
   <input required class="required" id="your-name" type="file" name="properties[Your name]" width="100%">
      <label for="your-name">Choose a Photo</label>
 </div>
+
+
+{% assign field_label = "your file has been uploaded" %}
+{% assign required_field = true %}
+{% assign hide_checkout = false %}
+
+{% comment %} Variables used if Shopify form field plus code has been installed {% endcomment %}
+
+{% assign accepted_formats = ".png, .jpg, .jpeg, .psd, .webp" %}
+{% assign show_file_in_lbl = false %}
+{% assign help_message = "Please upload one of the following file types:" %}
+
+{% comment %} 
+Do not edit the code below
+{% endcomment %}
+
+{% assign gen_id = field_label | remove: " " | strip | downcase %}
+
+<fieldset class="js product-form__input line-item-property__field"
+    data-input-type="file">    
+
+    <label for="{{ gen_id }}" class="form__label">Please upload a good photo of your pet. A photo taken at your pet's eye level is best.{% if show_file_in_lbl %} ({{ accepted_formats }}){% endif %}</label> 
+    
+<div class="upload-btn-wrapper">
+  <button class="btn">Choose  file</button>
+  <input 
+        id="{{ gen_id }}"
+        class="file__upload required__check {% if required_field %}required__field{% endif %}"
+        type="file"
+        name="properties[{% if hide_checkout %}_{% endif %}{{ field_label }}]"
+        form="product-form-{{ section.id }}"
+        value=""
+        accept="{{ accepted_formats }}"
+        data-help-msg="{{ help_message }}"
+        data-controller-form-label="{{ field_label }}"
+        file-input="{{ gen_id }}"
+        formats="{{ accepted_formats | replace: ", ", "|" | replace: " ", "" }}"
+        {% if required_field %} required {% endif %}
+        >
+</div>
+
+
+    <p id="warn-{{ gen_id }}" class="upload__warning"></p>
+</fieldset>
+
+<style>
+    .form__label {
+        max-width: 37rem;
+        margin-bottom: 0.6rem !important;
+    }
+
+    input[type="file"] {
+        font-family: var(--font-body-family);
+        font-style: var(--font-body-style);
+        font-weight: var(--font-body-weight);
+        font-size: 1.2rem;
+        line-height: calc(1 + .6 / var(--font-body-scale));
+        min-height: calc(var(--inputs-border-width) * 2);
+        min-width: calc(7rem + (var(--inputs-border-width) * 2));
+        margin-left: -0.15rem;
+    }
+      
+    input[type="file"]::file-selector-button {
+        font-family: var(--font-body-family);
+        font-style: var(--font-body-style);
+        font-weight: var(--font-body-weight);
+        font-size: 1.2rem;
+        line-height: calc(1 + .6 / var(--font-body-scale));
+        cursor: pointer;
+        margin: calc(var(--inputs-border-width) + 0.15rem);
+        margin-right: calc(var(--inputs-border-width) + 0.5rem);
+        padding: 0px 20px;
+        height: 4rem;
+        min-height: calc(var(--inputs-border-width) * 2);
+        min-width: calc(7rem + (var(--inputs-border-width) * 2));
+        color: rgba(var(--color-foreground),.75);
+        background-color: rgb(var(--color-background));
+        letter-spacing: .04rem;
+        border: 0.1rem solid transparent;
+        border-radius: var(--inputs-radius);
+        box-shadow: 0 0 0 var(--inputs-border-width) rgba(var(--color-foreground),var(--inputs-border-opacity));
+        transition: box-shadow var(--duration-short) ease;
+    }
+      
+    input[type="file"]::file-selector-button:hover, input[type="file"]::file-selector-button:focus, input[type="file"]::file-selector-button:focus-visible{
+        box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground),var(--inputs-border-opacity));
+        outline: 0;
+        border-radius: var(--inputs-radius);
+    }
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 1px solid #EE7226;
+  color: #fff;
+  background-color: #EE7226;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+cursor: pointer;
+}
+
+
+
+</style>
+
+
+
+
+
