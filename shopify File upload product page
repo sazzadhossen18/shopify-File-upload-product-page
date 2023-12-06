@@ -20,7 +20,7 @@ input[type="file"]{
 </div>
 
 
-{% assign field_label = "your file has been uploaded" %}
+{% assign field_label = "Your file has been uploaded" %}
 {% assign required_field = true %}
 {% assign hide_checkout = false %}
 
@@ -42,7 +42,7 @@ Do not edit the code below
     <label for="{{ gen_id }}" class="form__label">Please upload a good photo of your pet. A photo taken at your pet's eye level is best.{% if show_file_in_lbl %} ({{ accepted_formats }}){% endif %}</label> 
     
 <div class="upload-btn-wrapper">
-  <button class="btn">Choose  file</button>
+  <button class="btn">Choose  File</button>
   <input 
         id="{{ gen_id }}"
         class="file__upload required__check {% if required_field %}required__field{% endif %}"
@@ -56,7 +56,11 @@ Do not edit the code below
         file-input="{{ gen_id }}"
         formats="{{ accepted_formats | replace: ", ", "|" | replace: " ", "" }}"
         {% if required_field %} required {% endif %}
-        >
+        onchange="showPreview(event);" >
+
+ <div class="preview">
+      <img id="file-ip-1-preview">
+    </div>
 </div>
 
 
@@ -64,10 +68,19 @@ Do not edit the code below
 </fieldset>
 
 <style>
+
+.preview img {
+  width:100%;
+  display:none;
+}
+
     .form__label {
         max-width: 37rem;
         margin-bottom: 0.6rem !important;
     }
+label.form__label {
+    text-transform: uppercase;
+}
 
     input[type="file"] {
         font-family: var(--font-body-family);
@@ -138,6 +151,16 @@ cursor: pointer;
 
 </style>
 
+<script type="text/javascript">
+  function showPreview(event){
+  if(event.target.files.length > 0){
+    var src = URL.createObjectURL(event.target.files[0]);
+    var preview = document.getElementById("file-ip-1-preview");
+    preview.src = src;
+    preview.style.display = "block";
+  }
+}
+</script>
 
 
 
